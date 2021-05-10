@@ -7,7 +7,8 @@ import EditList from "./screens/EditList";
 import Login from "./screens/Login";
 import Settings from "./screens/Settings";
 import Colors from "./constants/Colors";
-import * as firebase from "firebase";
+import firebase from "firebase/app";
+import "firebase/firestore";
 
 const Stack = createStackNavigator();
 const AuthStack = createStackNavigator();
@@ -78,7 +79,10 @@ export default function App() {
     );
 }
 
-/*
-const firebaseConfig = YOUR_CONFIG_FROM_FIREBASE;
-*/
-firebase.initializeApp(firebaseConfig);
+//const firebaseConfig = YOUR_FIREBASE_CONFIG;
+
+if (!firebase.apps.length) {
+    firebase.initializeApp(firebaseConfig);
+} else {
+    firebase.app(); // if already initialized, use that one
+}
